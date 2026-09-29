@@ -1,0 +1,67 @@
+{
+  "monitoring": {
+    "interval_seconds": 300,
+    "system": {
+      "cpu_threshold_percent": 80.0,
+      "memory_threshold_percent": 80.0,
+      "disk_threshold_percent": 80.0,
+      "load_threshold": 4.0
+    },
+    "network": {
+      "timeout_seconds": 3,
+      "latency_warning_threshold_ms": 100.0,
+      "latency_critical_threshold_ms": 300.0,
+      "hosts": [
+        "8.8.8.8",
+        "google.com"
+      ],
+      "ports": [
+        {
+          "host": "127.0.0.1",
+          "port": 22,
+          "service_name": "SSH"
+        },
+        {
+          "host": "127.0.0.1",
+          "port": 80,
+          "service_name": "HTTP"
+        },
+        {
+          "host": "127.0.0.1",
+          "port": 443,
+          "service_name": "HTTPS"
+        }
+      ]
+    },
+    "services": {
+      "auto_restart_enabled": true,
+      "service_list": [
+        "nginx",
+        "ssh",
+        "cron"
+      ]
+    },
+    "logs": {
+      "files_to_monitor": [
+        "/var/log/nginx/error.log",
+        "/var/log/syslog",
+        "logs/sample_app.log"
+      ],
+      "error_keywords": [
+        "ERROR",
+        "WARNING",
+        "CRITICAL",
+        "FAILED",
+        "TIMEOUT"
+      ],
+      "max_lines_to_read": 100
+    }
+  },
+  "database": {
+    "path": "data/monitoring.db"
+  },
+  "logging": {
+    "file_path": "logs/monitor.log",
+    "level": "INFO"
+  }
+}
